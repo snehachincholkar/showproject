@@ -49,9 +49,9 @@ public class UserService {
 
 	}
 
-	private Map<String, Object> validateUser(String mobileNo, String password) {
+	private Map<String, Object> validateUser(String username, String password) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		User user = repo.findByCredentials(mobileNo, password);
+		User user = repo.findByCredentials(username, password);
 		if (user != null) {
 			response.put("Yes Valid data:", true);
 			return response;
