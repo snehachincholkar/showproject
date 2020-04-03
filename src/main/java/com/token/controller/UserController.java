@@ -20,7 +20,7 @@ public class UserController {
 	private HttpServletRequest request;
 
 	@PostMapping("/verifytoken")
-	public ResponseEntity<Object> verifytoken(@RequestBody Map<String, Object> reqBody) {
-		return new ResponseEntity<Object>(service.verifytoken(this.request, reqBody), HttpStatus.OK);
+	public ResponseEntity<Object> verifytoken(@RequestBody Map<String, Object> requestBody) {
+		return new ResponseEntity<Object>(service.verifytoken(this.request, requestBody), HttpStatus.OK);
 	}
 }
