@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.token.model.SMSMaster;
+import com.token.model.TemplateMaster;
 import com.token.model.User;
-import com.token.repository.SMSMasterRepo;
+import com.token.repository.MasterRepo;
 import com.token.repository.UserRepo;
 
 @Service
@@ -20,15 +19,15 @@ public class UserService {
 	private UserRepo repo;
 
 	@Autowired
-	private SMSMasterRepo smsMstRepo;
+	private MasterRepo mstRepo;
 
-	public Map<String, Object> storeTemplate(HttpServletRequest request, Map<String, Object> reqBody) {
+	public Map<String, Object> verifytoken(HttpServletRequest request, Map<String, Object> reqBody) {
 		Map<String, Object> response = this.validateTokenAndUser(request);
 		if (response.containsKey("isValid")) {
-			Long smsMasterId = Long.valueOf(reqBody.get("smsTemplateId").toString());
-			SMSMaster smsMstDB = this.smsMstRepo.getOne(smsMasterId);
-			if (smsMstDB != null) {
-				response.put("message", "Successfull...");
+			Long masterId = Long.valueOf(reqBody.get("templateId").toString());
+			TemplateMaster mstDB = this.mstRepo.getOne(masterId);
+			if (mstDB != null) {
+				response.put("Datasuccesmessage", "Successfull...");
 			}
 		}
 		return response;
@@ -36,15 +35,15 @@ public class UserService {
 
 	private Map<String, Object> validateTokenAndUser(HttpServletRequest request) {
 		String token = request.getHeader("token");
-		String mobileNo = request.getHeader("mobileNo");
+		String username = request.getHeader("username");
 		String password = request.getHeader("password");
 		User user = repo.findByToken(token);
 		if (user == null) {
 			Map<String, Object> response = new HashMap<String, Object>();
-			response.put("message", "Invalid token..");
+			response.put("Tokenmessage", "Invalid token..");
 			return response;
 		} else {
-			return this.validateUser(mobileNo, password);
+			return this.validateUser(username, password);
 
 		}
 
@@ -54,10 +53,10 @@ public class UserService {
 		Map<String, Object> response = new HashMap<String, Object>();
 		User user = repo.findByCredentials(mobileNo, password);
 		if (user != null) {
-			response.put("isValid", true);
+			response.put("Yes Valid data:", true);
 			return response;
 		} else {
-			response.put("message", "Invalid user id or password..");
+			response.put("DataFailMessage", "Invalid user id or password..");
 			return response;
 		}
 	}
