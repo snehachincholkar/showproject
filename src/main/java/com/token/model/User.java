@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "auth_user")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(name = "mobile_number")
-	private String mobileNumber;
+	@Column(name = "username")
+	private String username;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "token")
@@ -37,12 +37,13 @@ public class User {
 		this.token = token;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
