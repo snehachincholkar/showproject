@@ -23,7 +23,7 @@ public class UserService {
 
 	public Map<String, Object> verifytoken(HttpServletRequest request, Map<String, Object> reqBody) {
 		Map<String, Object> response = this.validateTokenAndUser(request);
-		if (response.containsKey("isValid")) {
+		if (response.containsKey("Datasuccesmessage")) {
 			Long masterId = Long.valueOf(reqBody.get("templateId").toString());
 			TemplateMaster mstDB = this.mstRepo.getOne(masterId);
 			if (mstDB != null) {
