@@ -8,22 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sms_master")
-public class SMSMaster {
+@Table(name = "templatemaster")
+public class TemplateMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "sms_template_id")
-	private Long smsTemplateId;
+	@Column(name = "template_id")
+	private Long templateId;
 	@Column(name = "message")
 	private String message;
 
-	public Long getSmsTemplateId() {
-		return smsTemplateId;
+	public Long getTemplateId() {
+		return templateId;
 	}
 
-	public void setSmsTemplateId(Long smsTemplateId) {
-		this.smsTemplateId = smsTemplateId;
+	public void setTemplateId(Long templateId) {
+		this.templateId = templateId;
 	}
 
 	public String getMessage() {
